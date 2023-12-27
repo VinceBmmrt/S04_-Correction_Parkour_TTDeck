@@ -1,0 +1,41 @@
+<%- include('header') %>
+
+<h1><%= title %></h1>
+
+<div class="cardsContainer">
+  <%if (cards.length) { %> <% cards.forEach( (card) => { %>
+
+  <div class="card">
+    <a href="/card/<%= card.id %>">
+      <img
+        src="/visuals/<%= card.visual_name %>"
+        alt="<%= card.name %> illustration"
+      />
+      <p class="cardName"><%= card.name %></p>
+    </a>
+
+    <% if(deck.find(deckCard => deckCard.id === card.id)) { %>
+    <a
+      class="link--addCard"
+      title="Supprimer du deck"
+      href="/removeFromDeck/<%= card.id %>"
+      >[ ❌ ]</a
+    >
+    <%} else { %>
+    <a
+      class="link--addCard"
+      title="Ajouter au deck"
+      href="/addToDeck/<%= card.id %>"
+      >[ ✅ ]</a
+    >
+    <% } %>
+  </div>
+
+  <% }) %> <% } else { %>
+
+  <p>Rien à voir ici</p>
+
+  <% } %>
+</div>
+
+<%- include('footer') %>
